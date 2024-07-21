@@ -4,8 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChaatGTP</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background: none; /* Remove default background */
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("chaat.jpg") no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(8px);
+            transition: filter 0.3s;
+            z-index: -1;
+        }
+        .text {
+            font-size: 10vw;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            z-index: 1;
+        }
+    </style>
 </head>
-<body style='background: url("chaat.jpg");'>
-    <div style="font-size: 10rem;">CHAAT KHAOGE?</div>
+<body>
+    <div class="background"></div>
+    <div class="text">Chaat Khaoge?</div>
+
+    <script>
+        // Function to get query parameters
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return params;
+        }
+
+        // Function to check for specific query parameter and show alert
+        function showAlertFromQueryParam() {
+            const params = getQueryParams();
+            if (params.has('message')) {
+                alert(params.get('message'));
+            }
+        }
+
+        // Show alert when the page loads
+        window.onload = showAlertFromQueryParam;
+
+        // Function to remove blur on click or hover
+        function removeBlur() {
+            document.querySelector('.background').style.filter = 'none';
+        }
+
+        // Add event listeners for click and hover on the text
+        const textElement = document.querySelector('.text');
+        textElement.addEventListener('click', removeBlur);
+        textElement.addEventListener('mouseover', removeBlur);
+    </script>
 </body>
 </html>
